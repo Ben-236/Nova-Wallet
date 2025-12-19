@@ -1,44 +1,57 @@
 # Nova Wallet Service
 
 ## Overview
-Simple NestJS wallet service supporting:
+A simple NestJS wallet service supporting:
 - Wallet creation
-- Funding
-- Transfers
-- Fetching wallet details with transaction history
+- Funding wallets
+- Transferring between wallets
+- Fetching wallet details along with transaction history
+
+Idempotency is implemented for fund and transfer operations using a unique `requestId`.
+
+---
 
 ## Tech Stack
+- Node.js
 - NestJS
 - TypeScript
 - In-memory storage (Map)
+- Jest for unit testing
 
-## Endpoints
+---
 
-### Create Wallet
-`POST /wallets`
-Body: `{ "currency": "USD" }`
+# Setup Instructions
 
-### Fund Wallet
-`POST /wallets/:id/fund`
-Body: `{ "amount": 100 }`
+1. Clone the repo:
 
-### Transfer Funds
-`POST /wallets/transfer`
-Body: `{ "fromId": "...", "toId": "...", "amount": 50 }`
-
-### Get Wallet Details
-`GET /wallets/:id`
-
-## Testing
-Basic unit tests are included using Jest:
-- Service instantiation
-- Controller instantiation
-- Endpoint coverage (fund/transfer/create)
-
-Run API locally:
 ```bash
-npm run start:dev    
+git clone https://github.com/Ben-236/Nova-Wallet
+
+
+
+Install dependencies:
+
+npm install
+
+
+Run the project in development mode:
+
+npm run start:dev
+
 
 Run tests:
-```bash
+
 npm run test
+
+Assumptions
+
+In-memory storage is acceptable; no database required.
+
+requestId is provided by the client for idempotency.
+
+Each operation (fund/transfer) is atomic.
+
+Transaction history is stored per wallet.
+
+API Endpoints
+

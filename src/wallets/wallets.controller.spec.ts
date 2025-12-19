@@ -21,6 +21,6 @@ describe('WalletsController', () => {
   });
 
   it('service should be defined', () => {
-    expect(service).toBeDefined(); // ✅ Use the service to remove the warning
+    expect(service).toBeDefined();
   });
 });

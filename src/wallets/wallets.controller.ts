@@ -15,13 +15,12 @@ export class WalletsController {
 
   @Post(':id/fund')
   fundWallet(@Param('id') id: string, @Body() dto: FundWalletDto) {
-    // Pass requestId for idempotency
     return this.walletsService.fundWallet(id, dto.amount, dto.requestId);
   }
 
   @Post('transfer')
   transfer(@Body() dto: TransferWalletDto) {
-    // Pass requestId for idempotency
+    // requestId for idempotency
     this.walletsService.transferFunds(
       dto.fromWalletId,
       dto.toWalletId,

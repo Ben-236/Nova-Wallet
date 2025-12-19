@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import {
   Injectable,
   BadRequestException,
@@ -43,7 +44,8 @@ export class WalletsService {
     wallet.balance += amount;
 
     const walletTransactions = this.transactions.get(walletId);
-    if (!walletTransactions) throw new NotFoundException('Transaction history not found');
+    if (!walletTransactions)
+      throw new NotFoundException('Transaction history not found');
 
     walletTransactions.push({
       id: uuid(),
@@ -57,9 +59,15 @@ export class WalletsService {
     return wallet;
   }
 
-  transferFunds(fromId: string, toId: string, amount: number, requestId: string): void {
+  transferFunds(
+    fromId: string,
+    toId: string,
+    amount: number,
+    requestId: string,
+  ): void {
     if (amount <= 0) throw new BadRequestException('Amount must be positive');
-    if (fromId === toId) throw new BadRequestException('Cannot transfer to the same wallet');
+    if (fromId === toId)
+      throw new BadRequestException('Cannot transfer to the same wallet');
 
     // Idempotency check
     if (this.processedRequests.has(requestId)) return;
@@ -75,6 +83,7 @@ export class WalletsService {
     receiver.balance += amount;
 
     const transaction: Transaction = {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       id: uuid(),
       type: 'TRANSFER',
       amount,
@@ -96,12 +105,16 @@ export class WalletsService {
     this.processedRequests.add(requestId);
   }
 
-  getWalletDetails(walletId: string): { wallet: Wallet; transactions: Transaction[] } {
+  getWalletDetails(walletId: string): {
+    wallet: Wallet;
+    transactions: Transaction[];
+  } {
     const wallet = this.wallets.get(walletId);
     if (!wallet) throw new NotFoundException('Wallet not found');
 
     const walletTransactions = this.transactions.get(walletId);
-    if (!walletTransactions) throw new NotFoundException('Transaction history not found');
+    if (!walletTransactions)
+      throw new NotFoundException('Transaction history not found');
 
     return {
       wallet,
