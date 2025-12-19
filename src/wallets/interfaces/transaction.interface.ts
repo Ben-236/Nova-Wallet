@@ -5,4 +5,4 @@ export interface Transaction {
   fromWalletId?: string;
   toWalletId?: string;
   timestamp: Date;
-}
+ }

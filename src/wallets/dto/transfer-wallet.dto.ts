@@ -10,4 +10,5 @@ export class TransferWalletDto {
   @IsNumber()
   @Min(1)
   amount: number;
+  requestId: string;
 }
