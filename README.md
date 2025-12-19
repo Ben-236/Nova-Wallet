@@ -55,3 +55,7 @@ Transaction history is stored per wallet.
 
 API Endpoints
 
+Postman Documentation:  
+
+https://documenter.getpostman.com/view/19033521/2sB3dWq6d9
+

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   Injectable,
   BadRequestException,
@@ -83,7 +83,6 @@ export class WalletsService {
     receiver.balance += amount;
 
     const transaction: Transaction = {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       id: uuid(),
       type: 'TRANSFER',
       amount,
